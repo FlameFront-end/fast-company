@@ -5,4 +5,4 @@ const API = {
 	users,
 	professions
 }
-export default API;
+export default API
