@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { validator } from '../../utils/validator'
 import TextField from '../common/form/TextField'
+import api from '../../api'
+import SelectField from '../common/form/SelectField'
 
-const LoginForm = () => {
-	const [data, setData] = useState({ email: '', password: '' })
+const RegisterForm = () => {
+	const [data, setData] = useState({ email: '', password: '', profession: '' })
 	const [errors, setErrors] = useState({})
+	const [professions, setProfession] = useState()
+
+	useEffect(() => {
+		api.professions.fetchAll().then(data => setProfession(data))
+	}, [])
+
+	useEffect(() => {
+		console.log(professions)
+	}, [professions])
+
 	const handleChange = ({ target }) => {
 		setData(prevState => ({ ...prevState, [target.name]: target.value }))
 	}
@@ -25,6 +37,11 @@ const LoginForm = () => {
 			min: {
 				message: 'Пароль должен состоять минимум из 8 символов!',
 				value: 8
+			}
+		},
+		profession: {
+			isRequired: {
+				message: 'Поле обязательно для заполнения!'
 			}
 		}
 	}
@@ -66,15 +83,23 @@ const LoginForm = () => {
 				error={errors.password}
 				onChange={handleChange}
 			/>
+			<SelectField
+				value={data.profession}
+				onChange={handleChange}
+				options={professions}
+				defaultOption='Выберите профессию'
+				label='Профессия'
+				error={errors.profession}
+			/>
 			<button
 				type='submit'
 				disabled={!isValid}
 				className='btn btn-primary w-100 mx-auto'
 			>
-				Войти
+				Зарегистрироваться
 			</button>
 		</form>
 	)
 }
 
-export default LoginForm
+export default RegisterForm

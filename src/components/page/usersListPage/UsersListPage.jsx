@@ -99,6 +99,7 @@ const UsersListPage = () => {
 						type='text'
 						name='searchQuery'
 						placeholder='Поиск...'
+						className='form-control'
 						onChange={handleSearchQuery}
 						value={searchQuery}
 					/>
