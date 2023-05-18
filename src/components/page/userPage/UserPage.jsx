@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import api from '../api'
-import QualitiesList from './QualitiesList'
+import api from '../../../api'
+import QualitiesList from '../../ui/qualities/QualitiesList'
 import { useNavigate } from 'react-router-dom'
 
 const UserPage = ({ userId }) => {
@@ -15,7 +15,6 @@ const UserPage = ({ userId }) => {
 		navigate('/users')
 	}
 
-	//67rdca3eeb7f6fgeed471823
 	if (user) {
 		return (
 			<div className='d-flex align-items-center flex-column gap-3'>
