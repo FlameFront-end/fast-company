@@ -5,6 +5,7 @@ import api from '../../api'
 import SelectField from '../common/form/SelectField'
 import RadioField from '../common/form/RadioField'
 import MultiSelectField from '../common/form/MultiSelectField'
+import CheckBoxField from '../common/form/checkBoxField'
 
 const RegisterForm = () => {
 	const [data, setData] = useState({
@@ -12,7 +13,8 @@ const RegisterForm = () => {
 		password: '',
 		profession: '',
 		sex: 'Male',
-		qualities: []
+		qualities: [],
+		license: false
 	})
 
 	const [qualities, setQualities] = useState({})
@@ -24,12 +26,9 @@ const RegisterForm = () => {
 		api.qualities.fetchAll().then(data => setQualities(data))
 	}, [])
 
-	useEffect(() => {
-		console.log(professions)
-	}, [professions])
+	useEffect(() => {}, [professions])
 
 	const handleChange = target => {
-		console.log(target)
 		setData(prevState => ({ ...prevState, [target.name]: target.value }))
 	}
 
@@ -54,6 +53,12 @@ const RegisterForm = () => {
 		profession: {
 			isRequired: {
 				message: 'Поле обязательно для заполнения!'
+			}
+		},
+		license: {
+			isRequired: {
+				message:
+					'Вы не можете использовать наш сервис без подтверждения лицензионного соглашения!'
 			}
 		}
 	}
@@ -120,6 +125,18 @@ const RegisterForm = () => {
 				name='qualities'
 				label='Выберите ваши качества'
 			/>
+			<CheckBoxField
+				value={data.license}
+				onChange={handleChange}
+				name='license'
+				error={errors.license}
+			>
+				{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+				Подтвердить{' '}
+				<a href='#' className='link-primary'>
+					лицензионное соглашение
+				</a>
+			</CheckBoxField>
 			<button
 				type='submit'
 				disabled={!isValid}

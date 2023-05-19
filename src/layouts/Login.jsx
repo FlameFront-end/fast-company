@@ -19,7 +19,7 @@ const Login = () => {
 						<h3 className='mb-4'>Регистрация</h3>
 						<RegisterForm />
 						<p className='mt-2'>
-							Уже есть аккаунт?
+							Уже есть аккаунт?{' '}
 							<span
 								onClick={toggleFormType}
 								role='button'
@@ -34,7 +34,7 @@ const Login = () => {
 						<h3 className='mb-4'>Вход</h3>
 						<LoginForm />
 						<p className='mt-2'>
-							Ещё нет аккаунта?
+							Ещё нет аккаунта?{' '}
 							<span
 								onClick={toggleFormType}
 								role='button'
