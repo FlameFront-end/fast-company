@@ -7,4 +7,4 @@ const API = {
 	professions,
 	qualities
 }
-export default API
+export default API;

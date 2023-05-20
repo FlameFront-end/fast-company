@@ -4,7 +4,14 @@ import makeAnimated from 'react-select/animated'
 
 import PropTypes from 'prop-types'
 
-const MultiSelectField = ({ options, onChange, name, label }) => {
+const MultiSelectField = ({
+	options,
+	onChange,
+	name,
+	label,
+	defaultValue,
+	defaultOption
+}) => {
 	const animatedComponents = makeAnimated()
 	const optionsArray =
 		!Array.isArray(options) && typeof options === 'object'
@@ -20,16 +27,20 @@ const MultiSelectField = ({ options, onChange, name, label }) => {
 
 	return (
 		<div className='mb-4'>
-			<label htmlFor={name}>{label}</label>
+			<label className='mb-2' htmlFor={name}>
+				{label}
+			</label>
 			<Select
 				isMulti
 				options={optionsArray}
+				defaultValue={defaultValue}
 				className='basic-multi-select'
 				classNamePrefix='select'
 				onChange={handleChange}
 				name={name}
 				components={animatedComponents}
 				closeMenuOnSelect={false}
+				defaultInputValue={defaultOption}
 			/>
 		</div>
 	)
@@ -38,7 +49,8 @@ MultiSelectField.propTypes = {
 	onChange: PropTypes.func,
 	options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 	name: PropTypes.string,
-	label: PropTypes.string
+	label: PropTypes.string,
+	defaultValue: PropTypes.array
 }
 
 export default MultiSelectField

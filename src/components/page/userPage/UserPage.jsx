@@ -10,10 +10,10 @@ const UserPage = ({ userId }) => {
 	const [user, setUser] = useState()
 	useEffect(() => {
 		api.users.getById(userId).then(data => setUser(data))
-	})
+	}, [])
 
 	const handleClick = () => {
-		navigate('/users')
+		navigate(window.location.pathname + '/edit')
 	}
 
 	if (user) {
@@ -25,7 +25,7 @@ const UserPage = ({ userId }) => {
 				<h3>Рейтинг: {user.rate}</h3>
 				<div>{<QualitiesList qualities={user.qualities} />}</div>
 				<button className='btn btn-primary' onClick={() => handleClick()}>
-					Все пользователи
+					Изменить
 				</button>
 			</div>
 		)
